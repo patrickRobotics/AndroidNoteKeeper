@@ -11,13 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 public class NoteRecylcerAdapter extends RecyclerView.Adapter<NoteRecylcerAdapter.ViewHolder> {
 
     private final Context mContext;
+    private final List<NoteInfo> mNotes;
     private final LayoutInflater mLayoutInflater;
 
-    public NoteRecylcerAdapter(Context context) {
+    public NoteRecylcerAdapter(Context context, List<NoteInfo> notes) {
         mContext = context;
+        mNotes = notes;
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
@@ -30,12 +34,14 @@ public class NoteRecylcerAdapter extends RecyclerView.Adapter<NoteRecylcerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        NoteInfo note = mNotes.get(position);
+        holder.mTextCourse.setText(note.getCourse().getTitle());
+        holder.mTextTitle.setText(note.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mNotes.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
